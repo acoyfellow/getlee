@@ -1,0 +1,75 @@
+.gitignore
+  s_5ddfc8f4108175::t_a49d7c032c006a 1-3
+AGENTS.md
+  s_5ddfc8f4108175::t_55982ba48f376f 1-9
+LICENSE
+  s_5ddfc8f4108175::t_32f2815bb58893 1-21
+README.md
+  s_5ddfc8f4108175::t_4fb9ae1e43493d 1-38
+client/index.html
+  s_5ddfc8f4108175::t_1111b1bab6752a 1-28
+client/src/command.ts
+  s_5ddfc8f4108175::t_461a49ce2876fd 1-32
+client/src/entry.ts
+  s_5ddfc8f4108175::t_fbeaf230e356f5 1-20
+client/src/main.ts
+  s_5ddfc8f4108175::t_1bb7ee8f14d802 1-15
+client/src/message.ts
+  s_5ddfc8f4108175::t_f34a1fe7bcfb1c 1-14
+client/src/model.ts
+  s_5ddfc8f4108175::t_2cee926a57258d 1-10
+client/src/styles.css
+  s_5ddfc8f4108175::t_f6153321b10e82 1-38
+client/src/update.ts
+  s_5ddfc8f4108175::t_ba0a8cecdbd9ae 1-28
+client/src/view/examples.ts
+  s_5ddfc8f4108175::t_1a9016e1662d21 1-9
+client/src/view/index.ts
+  s_5ddfc8f4108175::t_b44d2b9cdab039 1-225
+client/src/view/output.ts
+  s_5ddfc8f4108175::t_b332f73530c664 1-9
+client/src/view/qr.ts
+  s_5ddfc8f4108175::t_454061448957b7 1-13
+client/vite.config.ts
+  s_5ddfc8f4108175::t_d4d23af7ef3368 1-11
+package.json
+  s_5ddfc8f4108175::t_39faf7439d8eb5 1-36
+receipts/round-trip.json
+  s_5ddfc8f4108175::t_c166f20d1ea9ae 1-13
+scripts/gate.sh
+  s_5ddfc8f4108175::t_a0877941a6b5ca 1-9
+scripts/receipt.mjs
+  s_5ddfc8f4108175::t_d784a2da3d275e 1-46
+shared/link.ts
+  s_5ddfc8f4108175::t_3e98f405578d58 1-51
+src/index.ts
+  s_5ddfc8f4108175::t_5deda19b3ddfb7 1-21
+status.json
+  s_5ddfc8f4108175::t_b14843308bf013 1-8
+test/link.test.ts
+  s_5ddfc8f4108175::t_9a89ad0e9afd2b 1-49
+test/story.test.ts
+  s_5ddfc8f4108175::t_c82dc46cba56c8 1-78
+tsconfig.json
+  s_5ddfc8f4108175::t_60d48d2b57acf5 1-15
+vitest.config.ts
+  s_5ddfc8f4108175::t_aca68b9eabf673 1-3
+wrangler.jsonc
+  s_5ddfc8f4108175::t_54efaee5d183bc 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "5ae8daa70eef1251671fa2acfd670b7b9fd0538a",
+  "prompts": {},
+  "sessions": {
+    "s_5ddfc8f4108175": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0fc06-d951-77a8-8358-cd5dae6891bd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <jcoeyman@cloudflare.com>"
+    }
+  }
+}
