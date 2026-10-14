@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+	--color-bg: #0b0b0c;
+	--color-panel: #141416;
+	--color-raised: #1c1c1f;
+	--color-line: #26262a;
+	--color-line-strong: #3a3a40;
+	--color-ink: #f5f1ea;
+	--color-dim: #b9b2a8;
+	--color-faint: #7d776f;
+	--color-flare: #f6821f;
+	--color-flare-soft: #2a1a0c;
+	--color-flare-line: #5c3512;
+	--color-bad: #ff6b5e;
+	--font-sans: "Google Sans Flex", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "Google Sans Mono", ui-monospace, monospace;
+}
+
+html,
+body {
+	background: var(--color-bg);
+	color: var(--color-ink);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+}
+
+.hero-glow {
+	background-image: linear-gradient(90deg, rgb(11 11 12) 0%, rgb(11 11 12 / 0.85) 40%, rgb(11 11 12 / 0.2) 100%), url("/brand/hero.jpg");
+	background-size: cover;
+	background-position: right center;
+}
+
+@media (max-width: 767px) {
+	.hero-glow {
+		background-image: linear-gradient(180deg, rgb(11 11 12 / 0.55) 0%, rgb(11 11 12) 100%), url("/brand/hero.jpg");
+	}
+}

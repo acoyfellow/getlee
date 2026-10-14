@@ -1,0 +1,8 @@
+{
+  "phase": "local",
+  "domain": "getlee.link",
+  "domainBought": false,
+  "deployed": false,
+  "gate": "BASE=http://localhost:8790 npm run check",
+  "lastReceipt": "receipts/round-trip.json"
+}
