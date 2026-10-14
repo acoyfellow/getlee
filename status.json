@@ -1,8 +1,12 @@
 {
-  "phase": "local",
+  "phase": "live",
   "domain": "getlee.link",
-  "domainBought": false,
-  "deployed": false,
-  "gate": "BASE=http://localhost:8790 npm run check",
-  "lastReceipt": "receipts/round-trip.json"
+  "deployed": true,
+  "workerVersion": "24ac0a67-74b4-463b-b5ec-38b934621aec",
+  "gate": "RESOLVE=getlee.link:104.21.45.239 BASE=https://getlee.link npm run check && node scripts/short-receipt.mjs",
+  "receipts": [
+    "receipts/round-trip.json",
+    "receipts/short-link.json",
+    "receipts/prod-short.png"
+  ]
 }

@@ -2,7 +2,7 @@ import { Schema } from "effect";
 import type { Document, Html, HtmlBuilder } from "foldkit/html";
 import { AccountId, type LeeLink, leeLink, MAX_DRAFT_CHARS } from "../../../shared/link";
 import { Message } from "../message";
-import type { Model } from "../model";
+import { type Model, Short } from "../model";
 import { EXAMPLES } from "./examples";
 import { htmlSnippet, markdownSnippet, problemText } from "./output";
 import { qrDataUrl } from "./qr";
@@ -21,7 +21,7 @@ const header = (h: H): Html =>
 	h.header(
 		[h.Class("relative z-10 mx-auto flex h-16 max-w-6xl items-center gap-3 px-5")],
 		[
-			h.img([h.Src("/brand/icon-192.png"), h.Alt(""), h.Width("30"), h.Height("30"), h.Class("rounded-lg")]),
+			h.img([h.Src("/brand/cloudflare-cloud.svg"), h.Alt("Cloudflare"), h.Width("44"), h.Height("20")]),
 			h.span([h.Class("text-[16px] font-semibold tracking-[-0.01em]")], ["getlee.link"]),
 			h.a(
 				[h.Href("https://developers.cloudflare.com/agents/"), h.Target("_blank"), h.Rel("noreferrer"), h.Class("ml-auto text-[13px] text-dim hover:text-ink")],
@@ -119,6 +119,40 @@ const copyButton = (h: H, model: Model, key: string, label: string, text: string
 		[model.copiedKey === key ? "Copied" : label],
 	);
 
+const shortButton = (h: H, model: Model, url: string, label: string): Html =>
+	h.button(
+		[
+			h.Type("button"),
+			h.Id("shorten"),
+			h.Class("h-10 rounded-lg border border-line-strong px-4 text-[14px] font-medium text-ink transition-colors hover:bg-raised disabled:opacity-50"),
+			h.Disabled(model.short._tag === "Making"),
+			h.OnClick(Message.ClickedShorten({ prompt: model.prompt, account: accountOf(model), forUrl: url })),
+		],
+		[label],
+	);
+
+const SHORT_NOTE = "Short links store your prompt on getlee.link so the code can find it. Long links store nothing.";
+
+const shortRow = (h: H, model: Model, url: string): Html =>
+	h.div(
+		[h.Class("mt-4 grid gap-2 border-t border-flare-line/60 pt-4")],
+		Short.match(model.short, {
+			Idle: () => [h.div([h.Class("flex flex-wrap items-center gap-3")], [shortButton(h, model, url, "Make a short link"), h.span([h.Class("text-[12px] text-faint")], [SHORT_NOTE])])],
+			Making: () => [h.div([h.Class("flex flex-wrap items-center gap-3")], [shortButton(h, model, url, "Making…"), h.span([h.Class("text-[12px] text-faint")], [SHORT_NOTE])])],
+			Failed: ({ reason }) => [h.div([h.Class("flex flex-wrap items-center gap-3")], [shortButton(h, model, url, "Try again"), h.span([h.Id("short-error"), h.Class("text-[12px] text-bad")], [reason])])],
+			Made: ({ url: short }) => [
+				h.div(
+					[h.Class("flex flex-wrap items-center gap-2")],
+					[
+						h.input([h.Id("short"), h.Value(short), h.Readonly(true), h.Class("h-10 min-w-0 flex-1 rounded-lg border border-line-strong bg-bg px-3 font-mono text-[14px] text-ink outline-none")]),
+						copyButton(h, model, "short", "Copy short link", short, true),
+					],
+				),
+				h.span([h.Class("text-[12px] text-faint")], [SHORT_NOTE]),
+			],
+		}),
+	);
+
 const qrBlock = (h: H, url: string): Array<Html> => {
 	const source = qrDataUrl(url);
 
@@ -145,8 +179,9 @@ const readyCard = (h: H, model: Model, url: string): Html =>
 					copyButton(h, model, "html", "HTML button", htmlSnippet(url), false),
 				],
 			),
+			shortRow(h, model, url),
 			...(model.copyFailed ? [h.p([h.Class("mt-2 text-[12px] text-bad")], ["The browser blocked the clipboard. Select the link and copy it by hand."])] : []),
-			h.div([h.Class("mt-4 flex items-end gap-4")], [...qrBlock(h, url), h.p([h.Class("pb-1 text-[12px] leading-relaxed text-faint")], ["Scan to open on another device. Good for slides and posters."])]),
+			h.div([h.Class("mt-4 flex items-end gap-4")], [...qrBlock(h, model.short._tag === "Made" ? model.short.url : url), h.p([h.Class("pb-1 text-[12px] leading-relaxed text-faint")], ["Scan to open on another device. Good for slides and posters."])]),
 		],
 	);
 
@@ -174,7 +209,7 @@ const preview = (h: H, model: Model): Html =>
 
 const FACTS: ReadonlyArray<readonly [string, string]> = [
 	["Nothing runs by itself", "Lee never sends the prompt for the reader. They see it, can change it, and press send."],
-	["Your prompt stays in the link", "It rides after the # in the URL, which browsers do not send to servers. This site has no backend."],
+	["Your prompt stays in the link", "A long link keeps the prompt after the #, which browsers never send to a server. Only short links store it."],
 	["It survives login", "If the reader is signed out, the dashboard keeps the draft through sign-in for up to ten minutes."],
 	["It cannot reach further", "A link carries plain text only. It cannot pick tools, change permissions, or act for the reader."],
 ];

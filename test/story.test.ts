@@ -1,6 +1,6 @@
 import { Command, given, message, model, story } from "foldkit/story";
 import { describe, expect, test } from "vitest";
-import { ClearCopied, CopyText, SaveShareHash } from "../client/src/command";
+import { ClearCopied, CopyText, MakeShort, SaveShareHash } from "../client/src/command";
 import { initialModel } from "../client/src/main";
 import { Message } from "../client/src/message";
 import { update } from "../client/src/update";
@@ -73,6 +73,38 @@ describe("copying", () => {
 			message(Message.ClickedCopy({ key: "link", text: "u" })),
 			Command.resolve(CopyText, Message.FinishedCopy({ key: "link", ok: false })),
 			model((current) => expect(current.copyFailed).toBe(true)),
+		);
+	});
+});
+
+describe("short links", () => {
+	test("a short link replaces the panel only for the link it was made for", () => {
+		const url = "https://dash.cloudflare.com/?to=/:account#lee-draft=hi";
+		story(
+			update,
+			given({ ...blank, prompt: "hi" }),
+			message(Message.ClickedShorten({ prompt: "hi", account: null, forUrl: url })),
+			Command.resolve(MakeShort, Message.MadeShort({ forUrl: url, url: "https://getlee.link/s/abc2345" })),
+			model((current) => expect(current.short).toEqual({ _tag: "Made", forUrl: url, url: "https://getlee.link/s/abc2345" })),
+		);
+	});
+
+	test("editing the prompt drops an old short link so it never points at stale text", () => {
+		story(
+			update,
+			given({ ...blank, prompt: "hi", short: { _tag: "Made", forUrl: "x", url: "https://getlee.link/s/abc2345" } }),
+			message(Message.UpdatedPrompt({ value: "hi there" })),
+			Command.resolve(SaveShareHash, Message.SavedShareHash()),
+			model((current) => expect(current.short._tag).toBe("Idle")),
+		);
+	});
+
+	test("a late answer for an old prompt is ignored", () => {
+		story(
+			update,
+			given({ ...blank, prompt: "new" }),
+			message(Message.MadeShort({ forUrl: "old", url: "https://getlee.link/s/abc2345" })),
+			model((current) => expect(current.short._tag).toBe("Idle")),
 		);
 	});
 });

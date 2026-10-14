@@ -6,7 +6,8 @@ const { chromium } = require("playwright");
 
 const BASE = process.env.BASE ?? "http://localhost:8790";
 const PROMPT = "Audit my DNS & check #tags, 100% of ?zones\nthen report 🚀";
-const browser = await chromium.launch();
+const [resolveHost, resolveIp] = (process.env.RESOLVE ?? "").split(":");
+const browser = await chromium.launch(resolveIp === undefined ? {} : { args: [`--host-resolver-rules=MAP ${resolveHost} ${resolveIp}`] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 const outbound = [];
 page.on("request", (request) => outbound.push(request.url()));

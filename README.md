@@ -20,7 +20,9 @@ This is the shape the Cloudflare dashboard documents for external Lee drafts.
 
 ## This site
 
-A static Foldkit app (Effect 4, Tailwind 4) served by a Worker that only adds security headers. There is no backend and no analytics. The prompt you type lives in this page's own `#p=` fragment so you can share the editor.
+A Foldkit app (Effect 4, Tailwind 4) served by a Worker. There are no analytics.
+
+Long links never touch the server. Short links do: `POST /api/short` builds the same Lee link on the server, stores it in KV under a random 7-character code, and `GET /s/<code>` answers with a 302 to it. The stored value is the full Lee link, so the prompt is kept on getlee.link. Creation is rate limited to 20 per minute per IP. The prompt you type lives in this page's own `#p=` fragment so you can share the editor.
 
 ## Run it
 

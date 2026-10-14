@@ -1,0 +1,29 @@
+{
+  "schema": "guardrail.deploy-receipt.v0",
+  "timestamp": "2026-10-14T14:57:02.827Z",
+  "command": [
+    "guardrail",
+    "receipt",
+    "./.guardrail-staged.18036.wrangler.jsonc"
+  ],
+  "configPath": "./.guardrail-staged.18036.wrangler.jsonc",
+  "decision": {
+    "allowed": true,
+    "findings": []
+  },
+  "exposure": {
+    "isPublic": false,
+    "surface": "no public surface",
+    "reason": "",
+    "criticalMessage": "",
+    "routes": [],
+    "workersDev": false
+  },
+  "bindings": [],
+  "auth": {
+    "detected": false,
+    "partial": false,
+    "patterns": [],
+    "source": "/Users/jcoeyman/cloudflare/getlee/src/index.ts"
+  }
+}

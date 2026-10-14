@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-14T15:33:23.502Z",
+  "base": "https://getlee.link",
+  "short": "https://getlee.link/s/DHvksZh",
+  "location": "https://dash.cloudflare.com/?to=/:account#lee-draft=Short%20link%20receipt%202026-10-14T15%3A33%3A22.542Z%3A%20audit%20my%20DNS%20%26%20%23tags%2C%20100%25%20%F0%9F%9A%80",
+  "checks": {
+    "createsShortLink": true,
+    "redirectsWith302": true,
+    "locationIsExactLeeLink": true,
+    "refusesOver2000": true,
+    "unknownCodeIs404": true
+  }
+}

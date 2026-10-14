@@ -9,6 +9,9 @@ export const Message = defineMessageUnion({
 	FinishedCopy: { key: Schema.String, ok: Schema.Boolean },
 	ExpiredCopied: { key: Schema.String },
 	SavedShareHash: {},
+	ClickedShorten: { prompt: Schema.String, account: Schema.NullOr(Schema.String), forUrl: Schema.String },
+	MadeShort: { forUrl: Schema.String, url: Schema.String },
+	FailedShort: { forUrl: Schema.String, reason: Schema.String },
 });
 
 export type Message = typeof Message.Type;
