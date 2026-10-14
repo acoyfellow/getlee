@@ -24,7 +24,7 @@ const header = (h: H): Html =>
 			h.img([h.Src("/brand/cloudflare-cloud.svg"), h.Alt("Cloudflare"), h.Width("44"), h.Height("20")]),
 			h.span([h.Class("text-[16px] font-semibold tracking-[-0.01em]")], ["getlee.link"]),
 			h.a(
-				[h.Href("https://developers.cloudflare.com/agents/"), h.Target("_blank"), h.Rel("noreferrer"), h.Class("ml-auto text-[13px] text-dim hover:text-ink")],
+				[h.Href("https://developers.cloudflare.com/agent-lee/"), h.Target("_blank"), h.Rel("noreferrer"), h.Class("ml-auto text-[13px] text-dim hover:text-ink")],
 				["What is Agent Lee?"],
 			),
 		],
