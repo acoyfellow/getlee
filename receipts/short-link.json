@@ -1,8 +1,8 @@
 {
-  "at": "2026-10-14T15:35:22.839Z",
+  "at": "2026-10-14T17:08:58.746Z",
   "base": "https://getlee.link",
-  "short": "https://getlee.link/s/z6dv57e",
-  "location": "https://dash.cloudflare.com/?to=/:account#lee-draft=Short%20link%20receipt%202026-10-14T15%3A35%3A21.671Z%3A%20audit%20my%20DNS%20%26%20%23tags%2C%20100%25%20%F0%9F%9A%80",
+  "short": "https://getlee.link/s/887jfey",
+  "location": "https://dash.cloudflare.com/#lee-draft=Short%20link%20receipt%202026-10-14T17%3A08%3A57.584Z%3A%20audit%20my%20DNS%20%26%20%23tags%2C%20100%25%20%F0%9F%9A%80",
   "checks": {
     "createsShortLink": true,
     "redirectsWith302": true,

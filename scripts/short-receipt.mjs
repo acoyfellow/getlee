@@ -36,7 +36,7 @@ const missing = await fetch(`${BASE}/s/zzzzzzz`, { redirect: "manual" });
 const checks = {
 	createsShortLink: made.status === 201 && typeof body?.url === "string" && body.url === `https://getlee.link/s/${body.code}`,
 	redirectsWith302: followed?.status === 302,
-	locationIsExactLeeLink: location.startsWith("https://dash.cloudflare.com/?to=/:account#lee-draft=") && decoded === PROMPT,
+	locationIsExactLeeLink: location.startsWith("https://dash.cloudflare.com/#lee-draft=") && decoded === PROMPT,
 	refusesOver2000: tooLong.status === 422,
 	unknownCodeIs404: missing.status === 404,
 };

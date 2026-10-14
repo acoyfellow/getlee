@@ -34,7 +34,7 @@ const receipt = {
 	base: BASE,
 	url,
 	checks: {
-		usesDocumentedShape: url.startsWith("https://dash.cloudflare.com/?to=/:account#lee-draft="),
+		usesDocumentedShape: url.startsWith("https://dash.cloudflare.com/#lee-draft="),
 		dashboardDecodesSamePrompt: decoded === PROMPT,
 		shareUrlRestoresPrompt: restored === PROMPT,
 		over2000Refused: (tooLong ?? "").includes("2,000"),

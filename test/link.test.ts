@@ -11,8 +11,8 @@ const urlOf = (prompt: string, account: string | null = null): string => {
 };
 
 describe("the Lee link", () => {
-	test("a public link goes through the account picker and carries the prompt after the hash", () => {
-		expect(urlOf("Deploy a Worker")).toBe("https://dash.cloudflare.com/?to=/:account#lee-draft=Deploy%20a%20Worker");
+	test("a public link opens the dashboard root and carries the prompt after the hash", () => {
+		expect(urlOf("Deploy a Worker")).toBe("https://dash.cloudflare.com/#lee-draft=Deploy%20a%20Worker");
 	});
 
 	test("an account link opens that account", () => {
@@ -28,7 +28,7 @@ describe("the Lee link", () => {
 	test("nothing in the prompt can escape the fragment", () => {
 		const url = urlOf("a#b?c&d=e /f");
 		expect(url.split("#").length).toBe(2);
-		expect(new URL(url).search).toBe("?to=/:account");
+		expect(new URL(url).search).toBe("");
 	});
 
 	test("an empty or blank prompt makes no link", () => {

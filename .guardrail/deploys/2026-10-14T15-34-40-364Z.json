@@ -1,0 +1,51 @@
+{
+  "schema": "guardrail.deploy-receipt.v0",
+  "timestamp": "2026-10-14T15:34:40.364Z",
+  "command": [
+    "guardrail",
+    "receipt",
+    "./.guardrail-staged.47578.wrangler.jsonc"
+  ],
+  "configPath": "./.guardrail-staged.47578.wrangler.jsonc",
+  "git": {
+    "sha": "5ae8daa70eef1251671fa2acfd670b7b9fd0538a",
+    "dirty": true
+  },
+  "decision": {
+    "allowed": true,
+    "findings": [
+      {
+        "severity": "WARNING",
+        "message": "Worker is attached to custom route getlee.link with sensitive bindings"
+      },
+      {
+        "severity": "WARNING",
+        "message": "kv_namespace binding \"SHORT\" exposed on custom route getlee.link"
+      }
+    ]
+  },
+  "exposure": {
+    "isPublic": true,
+    "surface": "custom route getlee.link",
+    "reason": "custom route getlee.link",
+    "criticalMessage": "Worker is attached to custom route getlee.link with sensitive bindings",
+    "routes": [
+      "getlee.link"
+    ],
+    "workersDev": false
+  },
+  "bindings": [
+    {
+      "type": "kv_namespace",
+      "name": "SHORT"
+    }
+  ],
+  "auth": {
+    "detected": false,
+    "partial": false,
+    "patterns": [
+      "rate-limiter"
+    ],
+    "source": "/Users/jcoeyman/cloudflare/getlee/src/index.ts"
+  }
+}

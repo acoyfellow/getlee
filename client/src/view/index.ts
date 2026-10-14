@@ -166,6 +166,7 @@ const readyCard = (h: H, model: Model, url: string): Html =>
 		[h.Id("result"), h.Class("rounded-2xl border border-flare-line bg-flare-soft/60 p-4 md:p-5"), h.AriaLabel("Your link"), h.AriaLive("polite")],
 		[
 			h.p([h.Class("mb-2 text-[13px] font-medium text-flare")], ["Your link is ready"]),
+			h.p([h.Id("fallback"), h.Class("mb-3 text-[12px] text-dim")], ["Opens the Cloudflare dashboard. If Lee does not open with your prompt, click Ask AI at the top."]),
 			h.input([h.Id("link"), h.Value(url), h.Readonly(true), h.Class("w-full truncate rounded-lg border border-line-strong bg-bg px-3 py-2 font-mono text-[12px] text-dim outline-none")]),
 			h.div(
 				[h.Class("mt-3 flex flex-wrap items-center gap-2")],

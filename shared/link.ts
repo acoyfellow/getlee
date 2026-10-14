@@ -3,7 +3,7 @@ import { Schema } from "effect";
 export const DRAFT_PREFIX = "#lee-draft=";
 export const MAX_DRAFT_CHARS = 2000;
 export const DASH_ORIGIN = "https://dash.cloudflare.com";
-export const ACCOUNT_PICKER_PATH = "/?to=/:account";
+export const ACCOUNT_PICKER_PATH = "/";
 
 export const AccountId = Schema.String.check(Schema.isPattern(/^[0-9a-f]{32}$/));
 

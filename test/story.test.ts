@@ -16,7 +16,7 @@ describe("making a link", () => {
 			message(Message.UpdatedPrompt({ value: "Audit my DNS" })),
 			Command.resolve(SaveShareHash, Message.SavedShareHash()),
 			model((current) => {
-				expect(linkOf(current)).toEqual({ _tag: "Link", url: "https://dash.cloudflare.com/?to=/:account#lee-draft=Audit%20my%20DNS", chars: 12 });
+				expect(linkOf(current)).toEqual({ _tag: "Link", url: "https://dash.cloudflare.com/#lee-draft=Audit%20my%20DNS", chars: 12 });
 			}),
 		);
 	});
@@ -38,7 +38,7 @@ describe("making a link", () => {
 			message(Message.UpdatedAccount({ value: "not-an-account" })),
 			model((current) => {
 				expect(accountOf(current)).toBeNull();
-				expect(linkOf(current)).toEqual({ _tag: "Link", url: "https://dash.cloudflare.com/?to=/:account#lee-draft=hi", chars: 2 });
+				expect(linkOf(current)).toEqual({ _tag: "Link", url: "https://dash.cloudflare.com/#lee-draft=hi", chars: 2 });
 			}),
 		);
 	});
@@ -79,7 +79,7 @@ describe("copying", () => {
 
 describe("short links", () => {
 	test("a short link replaces the panel only for the link it was made for", () => {
-		const url = "https://dash.cloudflare.com/?to=/:account#lee-draft=hi";
+		const url = "https://dash.cloudflare.com/#lee-draft=hi";
 		story(
 			update,
 			given({ ...blank, prompt: "hi" }),

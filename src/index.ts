@@ -70,11 +70,15 @@ const createShort = async (request: Request, env: Env): Promise<Response> => {
 	return json(201, { code, url: `${PUBLIC_ORIGIN}/s/${code}` });
 };
 
+const LEGACY_PICKER_PREFIX = "https://dash.cloudflare.com/?to=/:account#";
+
+const currentTarget = (stored: string): string => (stored.startsWith(LEGACY_PICKER_PREFIX) ? `https://dash.cloudflare.com/#${stored.slice(LEGACY_PICKER_PREFIX.length)}` : stored);
+
 const followShort = async (code: string, env: Env): Promise<Response> => {
 	const target = isShortCode(code) ? await env.SHORT.get(code) : null;
 	if (target === null) return secured(new Response("This short link does not exist.", { status: 404, headers: { "content-type": "text/plain; charset=utf-8" } }));
 
-	return secured(new Response(null, { status: 302, headers: { location: target, "cache-control": "no-store" } }));
+	return secured(new Response(null, { status: 302, headers: { location: currentTarget(target), "cache-control": "no-store" } }));
 };
 
 export default {

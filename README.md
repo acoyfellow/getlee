@@ -7,10 +7,10 @@ Turn any prompt into a link that opens Cloudflare's Agent Lee with the prompt ty
 ## What the link is
 
 ```
-https://dash.cloudflare.com/?to=/:account#lee-draft=<encodeURIComponent(prompt)>
+https://dash.cloudflare.com/#lee-draft=<encodeURIComponent(prompt)>
 ```
 
-This is the shape the Cloudflare dashboard documents for external Lee drafts.
+This is the same shape as the `lee-link` CLI. The dashboard also documents `/?to=/:account#lee-draft=`, but on 2026-10-14 that form lost the draft at the account picker in production (`receipts/dash-picker.png`). The bare form opened Lee with the draft (`receipts/dash-askai.png`).
 
 - Lee shows the prompt as an editable draft with the notice "Draft opened from a link. Review before sending." It never sends it alone.
 - The prompt rides after the `#`. Browsers do not send that part to servers.
