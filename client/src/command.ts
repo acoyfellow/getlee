@@ -3,6 +3,7 @@ import { Command } from "foldkit";
 import { shareHash } from "../../shared/link";
 import { ShortResponse } from "../../shared/short";
 import { Message } from "./message";
+import { StatsData } from "./model";
 
 export const CopyText = Command.define("CopyText", {
 	args: { key: Schema.String, text: Schema.String },
@@ -52,4 +53,19 @@ export const MakeShort = Command.define("MakeShort", {
 
 			return Message.MadeShort({ forUrl, url: short.url });
 		}).pipe(Effect.orElseSucceed(() => Message.FailedShort({ forUrl, reason: shortFailure(0) }))),
+});
+
+const decodeStats = Schema.decodeUnknownEffect(StatsData);
+
+export const LoadStats = Command.define("LoadStats", {
+	args: {},
+	messages: [Message.LoadedStats, Message.FailedStats],
+	execute: () =>
+		Effect.gen(function* () {
+			const response = yield* Effect.tryPromise(() => fetch("/api/stats"));
+			if (!response.ok) return Message.FailedStats();
+			const body = yield* Effect.tryPromise(() => response.json());
+
+			return Message.LoadedStats({ data: yield* decodeStats(body) });
+		}).pipe(Effect.orElseSucceed(() => Message.FailedStats())),
 });

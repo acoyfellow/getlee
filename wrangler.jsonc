@@ -7,6 +7,8 @@
   "compatibility_date": "2026-10-01",
   "routes": [{ "pattern": "getlee.link", "custom_domain": true }],
   "ratelimits": [{ "name": "SHORT_LIMIT", "namespace_id": "4207", "simple": { "limit": 20, "period": 60 } }],
+  "durable_objects": { "bindings": [{ "name": "STATS", "class_name": "Stats" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Stats"] }],
   "kv_namespaces": [{ "binding": "SHORT", "id": "bd2b6611292e40f1bf944d404ebf0a88" }],
   "assets": { "directory": "./dist", "binding": "ASSETS", "run_worker_first": true, "not_found_handling": "single-page-application" }
 }

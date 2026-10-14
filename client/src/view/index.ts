@@ -4,6 +4,8 @@ import { AccountId, type LeeLink, leeLink, MAX_DRAFT_CHARS } from "../../../shar
 import { Message } from "../message";
 import { type Model, Short } from "../model";
 import { EXAMPLES } from "./examples";
+import { galleryPage } from "./gallery";
+import { statsPage } from "./stats";
 import { htmlSnippet, markdownSnippet, problemText } from "./output";
 import { qrDataUrl } from "./qr";
 
@@ -17,15 +19,28 @@ export const linkOf = (model: Model): LeeLink => leeLink(model.prompt, accountOf
 
 const accountProblem = (model: Model): boolean => model.account !== "" && accountOf(model) === null;
 
-const header = (h: H): Html =>
+const NAV: ReadonlyArray<readonly [Model["page"], string, string]> = [
+	["make", "/", "Make a link"],
+	["gallery", "/gallery", "Gallery"],
+	["stats", "/stats", "Stats"],
+];
+
+const header = (h: H, model: Model): Html =>
 	h.header(
 		[h.Class("relative z-10 mx-auto flex h-16 max-w-6xl items-center gap-3 px-5")],
 		[
-			h.img([h.Src("/brand/cloudflare-cloud.svg"), h.Alt("Cloudflare"), h.Width("44"), h.Height("20")]),
-			h.span([h.Class("text-[16px] font-semibold tracking-[-0.01em]")], ["getlee.link"]),
 			h.a(
-				[h.Href("https://developers.cloudflare.com/agent-lee/"), h.Target("_blank"), h.Rel("noreferrer"), h.Class("ml-auto text-[13px] text-dim hover:text-ink")],
-				["What is Agent Lee?"],
+				[h.Href("/"), h.Class("flex items-center gap-3")],
+				[h.img([h.Src("/brand/cloudflare-cloud.svg"), h.Alt("Cloudflare"), h.Width("44"), h.Height("20")]), h.span([h.Class("hidden text-[16px] font-semibold tracking-[-0.01em] sm:inline")], ["getlee.link"])],
+			),
+			h.nav(
+				[h.Class("ml-auto flex items-center gap-1 text-[13px]"), h.AriaLabel("Pages")],
+				[
+					...NAV.map(([page, href, label]) =>
+						h.a([h.Href(href), h.Class(`rounded-md px-2.5 py-1.5 ${model.page === page ? "bg-raised text-ink" : "text-dim hover:text-ink"}`)], [label]),
+					),
+					h.a([h.Href("https://developers.cloudflare.com/agent-lee/"), h.Target("_blank"), h.Rel("noreferrer"), h.Class("hidden px-2.5 py-1.5 text-dim hover:text-ink md:inline")], ["What is Agent Lee?"]),
+				],
 			),
 		],
 	);
@@ -77,7 +92,13 @@ const composer = (h: H, model: Model): Html =>
 					h.Class("w-full resize-y rounded-xl border border-line-strong bg-bg px-4 py-3 text-[16px] leading-relaxed text-ink outline-none placeholder:text-faint focus:border-flare"),
 					h.OnInput((value) => Message.UpdatedPrompt({ value })),
 				]),
-			h.div([h.Class("mt-3 flex flex-wrap gap-2")], EXAMPLES.map((example) => exampleChip(h, example.label, example.text))),
+			h.div(
+				[h.Class("mt-3 flex flex-wrap gap-2")],
+				[
+					...EXAMPLES.map((example) => exampleChip(h, example.label, example.text)),
+					h.a([h.Href("/gallery"), h.Class("rounded-full px-3 py-1 text-[13px] text-flare hover:underline")], ["More in the gallery →"]),
+				],
+			),
 			h.details(
 				[h.Class("mt-4 text-[13px] text-dim")],
 				[
@@ -229,18 +250,31 @@ const footer = (h: H): Html =>
 		["A community tool for Cloudflare's Agent Lee. Links open dash.cloudflare.com. ", h.a([h.Href("https://github.com/acoyfellow/getlee"), h.Class("underline underline-offset-2 hover:text-ink")], ["Source"])],
 	);
 
+const PAGE_TITLES: Record<Model["page"], string> = {
+	make: "getlee.link: send anyone a prompt for Agent Lee",
+	gallery: "Prompt gallery · getlee.link",
+	stats: "Open stats · getlee.link",
+};
+
 export const view = (model: Model, h: H): Document => {
+	if (model.page !== "make") {
+		return {
+			title: PAGE_TITLES[model.page],
+			body: h.div([h.Class("min-h-full")], [header(h, model), model.page === "gallery" ? galleryPage(h) : statsPage(h, model), footer(h)]),
+		};
+	}
+
 	const link = linkOf(model);
 
 	return {
-		title: "getlee.link: send anyone a prompt for Agent Lee",
+		title: PAGE_TITLES.make,
 		body: h.div(
 			[h.Class("min-h-full")],
 			[
 				h.div(
 					[h.Class("hero-glow")],
 					[
-						header(h),
+						header(h, model),
 						h.main(
 							[h.Class("mx-auto max-w-6xl px-5 pb-12")],
 							[

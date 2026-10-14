@@ -6,7 +6,7 @@ import { Message } from "../client/src/message";
 import { update } from "../client/src/update";
 import { accountOf, linkOf } from "../client/src/view";
 
-const blank = initialModel({ prompt: "" });
+const blank = initialModel({ prompt: "", page: "make" });
 
 describe("making a link", () => {
 	test("typing a prompt makes a link and saves the prompt in the page URL", () => {

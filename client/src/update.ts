@@ -2,7 +2,7 @@ import type { Command, Update } from "foldkit";
 import { modifyFields } from "foldkit/struct";
 import { ClearCopied, CopyText, MakeShort, SaveShareHash } from "./command";
 import { Message } from "./message";
-import { type Model, Short } from "./model";
+import { type Model, Short, StatsState } from "./model";
 
 type UpdateReturn = Update.Return<Model, Message>;
 
@@ -32,5 +32,7 @@ export const update = (model: Model, message: Message): UpdateReturn =>
 			commands: [MakeShort({ prompt, account, forUrl })],
 		}),
 		MadeShort: ({ forUrl, url }) => ({ model: matchesShort(model, forUrl) ? modifyFields(model, { short: () => Short.Made({ forUrl, url }) }) : model }),
+		LoadedStats: ({ data }) => ({ model: modifyFields(model, { stats: () => StatsState.Loaded({ data }) }) }),
+		FailedStats: () => ({ model: modifyFields(model, { stats: () => StatsState.Failed() }) }),
 		FailedShort: ({ forUrl, reason }) => ({ model: matchesShort(model, forUrl) ? modifyFields(model, { short: () => Short.Failed({ forUrl, reason }) }) : model }),
 	});
