@@ -1,0 +1,67 @@
+.gitignore
+  s_5ddfc8f4108175::t_81767f5baaa028 4
+.guardrail/deploys/2026-10-14T14-57-02-827Z.json
+  s_5ddfc8f4108175::t_6da02bdb62e226 1-29
+AGENTS.md
+  s_5ddfc8f4108175::t_3674f9122e2602 6
+README.md
+  s_5ddfc8f4108175::t_a25b2b7d3a94fe 23-25
+client/index.html
+  s_5ddfc8f4108175::t_4b1aa1b9225a2d 10
+client/src/command.ts
+  s_5ddfc8f4108175::t_bdc6513193b4b5 4,34-55
+client/src/main.ts
+  s_5ddfc8f4108175::t_710150bb07fff6 5,13
+client/src/message.ts
+  s_5ddfc8f4108175::t_af8ddc2f2f3d1a 12-14
+client/src/model.ts
+  s_5ddfc8f4108175::t_66f03c843e0467 2-11,18
+client/src/update.ts
+  s_5ddfc8f4108175::t_fa85fa644910a3 3,5,11-12,14,22,30-35
+client/src/view/index.ts
+  s_5ddfc8f4108175::t_a5bc323a6af3a3 5,24,122-155,182,184,212
+public/brand/cloudflare-cloud.svg
+  s_5ddfc8f4108175::t_4a595bcfafeb5e 1
+public/brand/icon.svg
+  s_5ddfc8f4108175::t_63fe4000e47d25 1
+receipts/round-trip.json
+  s_5ddfc8f4108175::t_d716c71d091857 2-3,12
+receipts/short-link.json
+  s_5ddfc8f4108175::t_1d13ff816ded68 1-13
+scripts/brand.mjs
+  s_5ddfc8f4108175::t_ca3c681f20f608 1-29
+scripts/receipt.mjs
+  s_5ddfc8f4108175::t_4cf9c9564332f6 9-10
+scripts/short-receipt.mjs
+  s_5ddfc8f4108175::t_89b08ff7916aa0 1-45
+scripts/shot.mjs
+  s_5ddfc8f4108175::t_06a9e6306b1cd0 1-15
+shared/short.ts
+  s_5ddfc8f4108175::t_24ffd45f1baaef 1-16
+src/index.ts
+  s_5ddfc8f4108175::t_c8484b69a826cb 1-9,11,17-36,38-42,44-77,82-88,90
+status.json
+  s_5ddfc8f4108175::t_41590d8a859200 2,4-11
+test/short.test.ts
+  s_5ddfc8f4108175::t_4e61f154e3aba3 1-17
+test/story.test.ts
+  s_5ddfc8f4108175::t_083fe21fa0eead 3,79-110
+wrangler.jsonc
+  s_5ddfc8f4108175::t_4de0c8293c7500 8-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "def7e036d30a552419c5a3951a2773e65d79bca7",
+  "prompts": {},
+  "sessions": {
+    "s_5ddfc8f4108175": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0fc06-d951-77a8-8358-cd5dae6891bd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <jcoeyman@cloudflare.com>"
+    }
+  }
+}
